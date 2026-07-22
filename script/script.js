@@ -1,27 +1,6 @@
-/* =========================================================
-   SMART GRADE MANAGER
-   Fichier : script.js  -> le COMPORTEMENT (la logique)
-   =========================================================
 
-   PLAN DU FICHIER :
-   1. Les variables (nos données + les éléments HTML)
-   2. La sauvegarde (localStorage)
-   3. L'affichage des cartes
-   4. Les calculs (moyenne, mention...)
-   5. Ajouter une matière (la fenêtre modale)
-   6. Le mode suppression
-   7. Le démarrage de l'application
-   ========================================================= */
-
-
-/* ---------- 1. VARIABLES ---------- */
-
-/* "matieres" est un tableau qui contient toutes nos matières.
-   Chaque matière est un objet : { nom, note, coefficient }.
-   Exemple : { nom: "Maths", note: 15, coefficient: 4 } */
 let matieres = [];
 
-/* Petit indicateur : est-on en mode suppression ? (vrai / faux) */
 let modeSuppression = false;
 
 /* On récupère les éléments HTML dont on a besoin.
