@@ -12,13 +12,18 @@
       rel="stylesheet"
     />
 
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
+  <!-- On relie notre feuille de style -->
+  <link rel="stylesheet" href="css/style.css" />
+
 
   <body>
     <header class="entete">
       <div>
-        <h1 class="titre">🎓 Smart Grade Manager</h1>
+        <h1 class="titre">Smart Grade Manager</h1>
         <p class="sous-titre">
           Gérez vos matières, vos notes et calculez votre moyenne.
         </p>
@@ -26,9 +31,7 @@
 
       <div class="entete-boutons">
         <!-- Ce bouton active/désactive le "mode suppression" -->
-        <button id="btn-mode-suppression" class="btn btn-gris">
-          🗑️ Mode suppression
-        </button>
+        <button id="btn-mode-suppression" class="btn btn-gris">Mode suppression</button>
 
         <!-- Ce bouton n'apparaît QUE pendant le mode suppression -->
         <button id="btn-supprimer-selection" class="btn btn-rouge cache">
@@ -112,4 +115,11 @@
 
     <script src="script/script.js"></script>
   </body>
+
+
+  <!-- On relie notre code JavaScript À LA FIN,
+       pour être sûr que tout le HTML est chargé avant. -->
+  <script src="script/script.js"></script>
+</body>
+
 </html>
