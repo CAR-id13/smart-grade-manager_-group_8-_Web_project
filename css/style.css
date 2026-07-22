@@ -1,0 +1,313 @@
+/* =========================================================
+   SMART GRADE MANAGER
+   Fichier : style.css  -> l'APPARENCE de la page
+   ========================================================= */
+
+/* ---------- 1. Réglages de base ---------- */
+
+/* Le sélecteur "*" veut dire "TOUS les éléments".
+   On enlève les marges par défaut et on active box-sizing
+   pour que les tailles soient plus simples à gérer. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Quelques couleurs et valeurs réutilisées, rangées dans des
+   "variables CSS" (:root = tout le document). Pratique : on
+   change la couleur ici et elle change partout. */
+:root {
+  --violet: #6366f1;
+  --violet-fonce: #4f46e5;
+  --gris-fond: #f4f5fb;
+  --gris-texte: #6b7280;
+  --vert: #22c55e;
+  --rouge: #ef4444;
+  --ombre: 0 4px 14px rgba(0, 0, 0, 0.06);
+  --arrondi: 16px;
+}
+
+body {
+  font-family: "Poppins", Arial, sans-serif; /* Poppins, sinon Arial */
+  background-color: var(--gris-fond);
+  color: #1f2937;
+  padding: 30px;
+}
+
+/* ---------- 2. En-tête ---------- */
+
+.entete {
+  display: flex;                 /* aligne le texte et les boutons */
+  justify-content: space-between;/* texte à gauche, boutons à droite */
+  align-items: center;
+  flex-wrap: wrap;               /* passe à la ligne sur petit écran */
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.titre {
+  font-size: 28px;
+  color: var(--violet-fonce);
+}
+
+.sous-titre {
+  color: var(--gris-texte);
+  margin-top: 4px;
+}
+
+.entete-boutons {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- 3. Boutons (style commun) ---------- */
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;               /* petite main au survol */
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:active {
+  transform: scale(0.97);        /* léger effet de clic */
+}
+
+.btn-violet { background: var(--violet); color: white; }
+.btn-gris   { background: #e5e7eb; color: #374151; }
+.btn-rouge  { background: var(--rouge); color: white; }
+
+/* ---------- 4. Barre de résumé ---------- */
+
+.resume {
+  display: grid;
+  /* auto-fit : autant de colonnes que possible,
+     minmax : chaque colonne fait au minimum 180px */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.resume-carte {
+  background: white;
+  border-radius: var(--arrondi);
+  padding: 18px;
+  box-shadow: var(--ombre);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resume-label {
+  font-size: 13px;
+  color: var(--gris-texte);
+}
+
+.resume-valeur {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--violet-fonce);
+}
+
+/* ---------- 5. La GRILLE de cartes ---------- */
+
+.grille {
+  display: grid;
+  /* Le point important du projet : une grille responsive.
+     Chaque carte fait au moins 240px de large. */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- 6. Une carte de matière ---------- */
+
+.carte {
+  background: white;
+  border-radius: var(--arrondi);
+  padding: 20px;
+  box-shadow: var(--ombre);
+  border: 2px solid transparent; /* bordure invisible, utile en mode suppression */
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.carte:hover {
+  transform: translateY(-3px);   /* la carte "monte" un peu au survol */
+}
+
+/* Ligne du haut de la carte : icône + nom */
+.carte-haut {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.carte-icone { font-size: 24px; }
+
+.carte-nom {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Les lignes d'infos (Note, Coefficient) */
+.carte-ligne {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+.carte-ligne strong {
+  color: #1f2937;
+}
+
+/* La ligne des points, mise en avant */
+.carte-points {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  font-weight: 600;
+  color: var(--violet);
+}
+
+/* Petite étiquette Admis / Ajourné dans la carte */
+.badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-admis   { background: #dcfce7; color: #15803d; }
+.badge-ajourne { background: #fee2e2; color: #b91c1c; }
+
+/* ---------- 7. Carte "Ajouter une matière" ---------- */
+
+.carte-ajouter {
+  border: 2px dashed #c7d2fe;    /* bordure en pointillés */
+  background: #f8f9ff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 180px;
+  color: var(--violet);
+  font-family: inherit;
+}
+
+.carte-ajouter:hover {
+  background: #eef1ff;
+  transform: translateY(-3px);
+}
+
+.plus {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--violet);
+  color: white;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ajouter-texte { font-weight: 600; font-size: 16px; }
+.ajouter-info  { font-size: 12px; color: var(--gris-texte); }
+
+/* ---------- 8. Mode suppression ---------- */
+
+/* Quand le mode suppression est actif, on ajoute la classe
+   "mode-suppression" sur le <body> (voir script.js).
+   Les cartes deviennent alors "cliquables pour sélection". */
+body.mode-suppression .carte:not(.carte-ajouter) {
+  cursor: pointer;
+  border-color: #fca5a5;         /* bordure rouge claire = "sélectionnable" */
+}
+
+/* Une carte sélectionnée pour la suppression */
+.carte.selectionnee {
+  border-color: var(--rouge) !important;
+  background: #fff5f5;
+}
+
+/* ---------- 9. La fenêtre modale (ajout) ---------- */
+
+.modal {
+  position: fixed;               /* reste au centre de l'écran */
+  inset: 0;                      /* haut/bas/gauche/droite = 0 */
+  background: rgba(0, 0, 0, 0.4);/* fond sombre semi-transparent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-contenu {
+  background: white;
+  border-radius: var(--arrondi);
+  padding: 28px;
+  width: 90%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-contenu h2 {
+  margin-bottom: 10px;
+  color: var(--violet-fonce);
+}
+
+.modal-contenu label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+.modal-contenu input {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.modal-contenu input:focus {
+  outline: 2px solid var(--violet);
+  border-color: transparent;
+}
+
+.modal-boutons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.erreur {
+  color: var(--rouge);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ---------- 10. Utilitaire "cacher" ---------- */
+
+/* On ajoute/enlève cette classe en JavaScript pour
+   afficher ou masquer un élément. */
+.cache {
+  display: none;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- =========================================================
+     SMART GRADE MANAGER
+     Projet web (HTML + CSS + JavaScript pur, sans framework)
+     Fichier : index.html  -> la STRUCTURE de la page
+     ========================================================= -->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Pour que la page s'adapte aux téléphones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Grade Manager</title>
+
+  <!-- Police d'écriture (facultative). Si internet est coupé,
+       le navigateur utilisera une police par défaut. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- On relie notre feuille de style -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ====== EN-TÊTE DE LA PAGE ====== -->
+  <header class="entete">
+    <div>
+      <h1 class="titre">🎓 Smart Grade Manager</h1>
+      <p class="sous-titre">Gérez vos matières, vos notes et calculez votre moyenne.</p>
+    </div>
+
+    <div class="entete-boutons">
+      <!-- Ce bouton active/désactive le "mode suppression" -->
+      <button id="btn-mode-suppression" class="btn btn-gris">🗑️ Mode suppression</button>
+
+      <!-- Ce bouton n'apparaît QUE pendant le mode suppression -->
+      <button id="btn-supprimer-selection" class="btn btn-rouge cache">Supprimer la sélection</button>
+    </div>
+  </header>
+
+  <!-- ====== BARRE DE RÉSUMÉ (statistiques globales) ====== -->
+  <!-- Ces valeurs sont calculées automatiquement par le JavaScript -->
+  <section class="resume">
+    <div class="resume-carte">
+      <span class="resume-label">Moyenne générale</span>
+      <span id="resume-moyenne" class="resume-valeur">0.00 / 20</span>
+    </div>
+    <div class="resume-carte">
+      <span class="resume-label">Résultat</span>
+      <span id="resume-mention" class="resume-valeur">—</span>
+    </div>
+    <div class="resume-carte">
+      <span class="resume-label">Total des points</span>
+      <span id="resume-points" class="resume-valeur">0.00</span>
+    </div>
+    <div class="resume-carte">
+      <span class="resume-label">Total des coefficients</span>
+      <span id="resume-coefficients" class="resume-valeur">0</span>
+    </div>
+  </section>
+
+  <!-- ====== GRILLE DES MATIÈRES ====== -->
+  <!-- Le JavaScript va remplir cette grille avec des cartes -->
+  <main id="grille-matieres" class="grille">
+
+    <!-- Carte spéciale "Ajouter une matière".
+         On la met directement dans le HTML car elle ne change jamais. -->
+    <button id="carte-ajouter" class="carte carte-ajouter">
+      <span class="plus">+</span>
+      <span class="ajouter-texte">Ajouter une matière</span>
+      <span class="ajouter-info">Cliquez pour ajouter</span>
+    </button>
+
+  </main>
+
+
+  <!-- ====== FENÊTRE (MODAL) POUR AJOUTER UNE MATIÈRE ====== -->
+  <!-- Cachée par défaut. On l'affiche quand on clique sur "Ajouter". -->
+  <div id="modal" class="modal cache">
+    <div class="modal-contenu">
+      <h2>Nouvelle matière</h2>
+
+      <!-- Champ : nom de la matière -->
+      <label for="champ-nom">Nom de la matière</label>
+      <input type="text" id="champ-nom" placeholder="Ex : Mathématiques" />
+
+      <!-- Champ : note sur 20 -->
+      <label for="champ-note">Note (sur 20)</label>
+      <input type="number" id="champ-note" min="0" max="20" step="0.5" placeholder="Ex : 15.5" />
+
+      <!-- Champ : coefficient -->
+      <label for="champ-coef">Coefficient</label>
+      <input type="number" id="champ-coef" min="1" step="1" placeholder="Ex : 3" />
+
+      <!-- Petit message d'erreur si les champs sont mal remplis -->
+      <p id="message-erreur" class="erreur cache"></p>
+
+      <!-- Boutons de la fenêtre -->
+      <div class="modal-boutons">
+        <button id="btn-annuler" class="btn btn-gris">Annuler</button>
+        <button id="btn-valider" class="btn btn-violet">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- On relie notre code JavaScript À LA FIN,
+       pour être sûr que tout le HTML est chargé avant. -->
+  <script src="script.js"></script>
+</body>
+</html>
