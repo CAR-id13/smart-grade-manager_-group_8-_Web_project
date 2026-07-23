@@ -32,7 +32,8 @@
       <div class="entete-boutons">
         <!-- Ce bouton active/désactive le "mode suppression" -->
         <button id="btn-mode-suppression" class="btn btn-gris">Mode suppression</button>
-
+        <!-- Bouton de changement de thème -->
+        <button id="btn-theme" class="btn btn-gris">🌙 Mode sombre</button>
         <!-- Ce bouton n'apparaît QUE pendant le mode suppression -->
         <button id="btn-supprimer-selection" class="btn btn-rouge cache">
           Supprimer la sélection
@@ -44,8 +45,7 @@
     <!-- Ces valeurs sont calculées automatiquement par le JavaScript -->
     <section class="resume">
       <div class="resume-carte">
-        <span class="resume-label">Moyenne générale</span>
-        <span id="resume-moyenne" class="resume-valeur">0.00 / 20</span>
+<span class="resume-label" id="label-moyenne">Moyenne générale</span>        <span id="resume-moyenne" class="resume-valeur">0.00 / 20</span>
       </div>
       <div class="resume-carte">
         <span class="resume-label">Résultat</span>
@@ -61,6 +61,24 @@
       </div>
     </section>
 
+<!-- ====== BARRE D'OUTILS : recherche + filtre ====== -->
+  <section class="outils">
+    <input
+      type="search"
+      id="champ-recherche"
+      class="recherche"
+      placeholder="🔍 Rechercher une matière..." />
+
+    <div class="filtre">
+      <label for="filtre-semestre">Filtrer par semestre</label>
+      <select id="filtre-semestre">
+        <option value="tous">Tous</option>
+        <option value="S1">Semestre 1</option>
+        <option value="S2">Semestre 2</option>
+      </select>
+    </div>
+  </section>
+
     <!--RILLE DES MATIÈRES-->
     <!-- Le JavaScript va remplir cette grille avec des cartes -->
     <main id="grille-matieres" class="grille">
@@ -72,6 +90,11 @@
         <span class="ajouter-info">Cliquez pour ajouter</span>
       </button>
     </main>
+
+<!-- Message affiché quand aucune matière ne correspond au filtre -->
+  <p id="message-vide" class="message-vide cache">
+    Aucune matière ne correspond à votre recherche.
+  </p>
 
     <div id="modal" class="modal cache">
       <div class="modal-contenu">
@@ -101,6 +124,13 @@
           step="1"
           placeholder="Ex : 3"
         />
+
+<!-- Champ : semestre -->
+      <label for="champ-semestre">Semestre</label>
+      <select id="champ-semestre">
+        <option value="S1">Semestre 1</option>
+        <option value="S2">Semestre 2</option>
+      </select>
 
         <!-- Petit message d'erreur si les champs sont mal remplis -->
         <p id="message-erreur" class="erreur cache"></p>

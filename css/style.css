@@ -11,15 +11,67 @@
   --gris-texte: #6b7280;
   --vert: #22c55e;
   --rouge: #ef4444;
+  /* Couleurs du thème clair, redéfinies plus bas pour le thème sombre */
+  --surface:         #ffffff;   /* fond des cartes et fenêtres */
+  --texte:           #1f2937;   /* texte principal */
+  --bordure:         #d1d5db;   /* contour des champs */
+  --separateur:      #eeeeee;   /* traits de séparation */
+
+  --btn-gris-fond:   #e5e7eb;
+  --btn-gris-texte:  #374151;
+
+  --ajouter-fond:    #f8f9ff;
+  --ajouter-survol:  #eef1ff;
+  --ajouter-bordure: #c7d2fe;
+
+  --admis-fond:      #dcfce7;
+  --admis-texte:     #15803d;
+  --ajourne-fond:    #fee2e2;
+  --ajourne-texte:   #b91c1c;
+  --semestre-fond:   #ede9fe;
+  --semestre-texte:  #4f46e5;
+  --selection-fond:  #fff5f5;
   --ombre: 0 4px 14px rgba(0, 0, 0, 0.06);
   --arrondi: 16px;
+}
+/* ---------- LE THÈME SOMBRE ----------
+   Mêmes variables, autres valeurs. Ce bloc ne s'applique que
+   si le <body> possède la classe "sombre" (ajoutée par le JS). */
+body.sombre {
+  --violet:          #818cf8;   /* violet plus clair, lisible sur fond noir */
+  --violet-fonce:    #a5b4fc;
+
+  --gris-fond:       #111827;   /* fond de page */
+  --gris-texte:      #9ca3af;   /* texte secondaire */
+  --surface:         #1f2937;
+  --texte:           #f9fafb;
+  --bordure:         #4b5563;
+  --separateur:      #374151;
+
+  --btn-gris-fond:   #374151;
+  --btn-gris-texte:  #e5e7eb;
+
+  --ajouter-fond:    #1e293b;
+  --ajouter-survol:  #273449;
+  --ajouter-bordure: #4c51bf;
+
+  --admis-fond:      #14532d;
+  --admis-texte:     #86efac;
+  --ajourne-fond:    #7f1d1d;
+  --ajourne-texte:   #fca5a5;
+  --semestre-fond:   #312e81;
+  --semestre-texte:  #c7d2fe;
+  --selection-fond:  #3f1d1d;
+
+  --ombre: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 body {
   font-family: "Poppins", Arial, sans-serif;
   background-color: var(--gris-fond);
-  color: #1f2937;
+  color: var(--texte);
   padding: 30px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .entete {
@@ -66,7 +118,7 @@ body {
 }
 
 .btn-violet { background: var(--violet); color: white; }
-.btn-gris   { background: #e5e7eb; color: #374151; }
+.btn-gris   { background: var(--btn-gris-fond); color: var(--btn-gris-texte); }
 .btn-rouge  { background: var(--rouge); color: white; }
 
 
@@ -78,7 +130,7 @@ body {
 }
 
 .resume-carte {
-  background: white;
+  background: var(--surface);
   border-radius: var(--arrondi);
   padding: 18px;
   box-shadow: var(--ombre);
@@ -105,7 +157,7 @@ body {
 }
 
 .carte {
-  background: white;
+  background: var(--surface);
   border-radius: var(--arrondi);
   padding: 20px;
   box-shadow: var(--ombre);
@@ -140,13 +192,13 @@ body {
 }
 
 .carte-ligne strong {
-  color: #1f2937;
+  color: var(--texte);
 }
 
 .carte-points {
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--separateur);
   font-weight: 600;
   color: var(--violet);
 }
@@ -160,12 +212,12 @@ body {
   font-weight: 600;
 }
 
-.badge-admis   { background: #dcfce7; color: #15803d; }
-.badge-ajourne { background: #fee2e2; color: #b91c1c; }
+.badge-admis   { background: var(--admis-fond); color: var(--admis-texte); }
+.badge-ajourne { background: var(--ajourne-fond); color: var(--ajourne-texte); }
 
 .carte-ajouter {
-  border: 2px dashed #c7d2fe;
-  background: #f8f9ff;
+  border: 2px dashed var(--ajouter-bordure);
+  background: var(--ajouter-fond);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -178,7 +230,7 @@ body {
 }
 
 .carte-ajouter:hover {
-  background: #eef1ff;
+  background: var(--ajouter-survol);
   transform: translateY(-3px);
 }
 
@@ -203,7 +255,7 @@ body.mode-suppression .carte:not(.carte-ajouter) {
 
 .carte.selectionnee {
   border-color: var(--rouge) !important;
-  background: #fff5f5;
+  background: var(--selection-fond);
 }
 
 
@@ -219,7 +271,7 @@ body.mode-suppression .carte:not(.carte-ajouter) {
 }
 
 .modal-contenu {
-  background: white;
+  background: var(--surface);  
   border-radius: var(--arrondi);
   padding: 28px;
   width: 90%;
@@ -242,7 +294,9 @@ body.mode-suppression .carte:not(.carte-ajouter) {
 
 .modal-contenu input {
   padding: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--bordure);
+  background: var(--surface);
+  color: var(--texte);
   border-radius: 8px;
   font-size: 15px;
   font-family: inherit;
@@ -270,3 +324,91 @@ body.mode-suppression .carte:not(.carte-ajouter) {
   display: none;
 }
 
+/* ---------- 11. Barre d'outils (recherche + filtre) ---------- */
+
+.outils {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: var(--surface);
+  border-radius: var(--arrondi);
+  padding: 14px 18px;
+  box-shadow: var(--ombre);
+  margin-bottom: 22px;
+}
+
+/* Le champ de recherche prend toute la place disponible */
+.recherche {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  border: 1px solid var(--bordure);
+  background: var(--surface);
+  color: var(--texte);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.recherche:focus {
+  outline: 2px solid var(--violet);
+  border-color: transparent;
+}
+
+.filtre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filtre label {
+  font-size: 14px;
+  color: var(--gris-texte);
+}
+
+/* Style commun aux deux menus déroulants */
+select {
+  padding: 10px 14px;
+  border: 1px solid var(--bordure);
+  color: var(--texte);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+select:focus {
+  outline: 2px solid var(--violet);
+  border-color: transparent;
+}
+
+/* ---------- 12. Étiquette de semestre sur les cartes ---------- */
+
+.badge-semestre {
+  margin-left: auto;          /* pousse l'étiquette à droite */
+  background: var(--semestre-fond); 
+  color: var(--semestre-texte);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ---------- 13. Message "aucun résultat" ---------- */
+
+.message-vide {
+  text-align: center;
+  color: var(--gris-texte);
+  padding: 40px 0;
+  font-size: 15px;
+}
+/* Accessibilité : on coupe les animations pour les personnes
+   qui l'ont demandé dans les réglages de leur système. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
