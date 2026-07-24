@@ -112,7 +112,7 @@ function afficherMatieres() {
 
     const points = matiere.note * matiere.coefficient;
     const estAdmis = matiere.note >= 10;
-
+    const lettreMatiere = obtenirLettre(matiere.note);
     const carte = document.createElement("div");
     carte.className = "carte carte-matiere";
 
@@ -134,7 +134,7 @@ function afficherMatieres() {
       <div class="carte-points">Points : ${points.toFixed(2)}</div>
 
       <span class="badge ${estAdmis ? "badge-admis" : "badge-ajourne"}">
-        ${estAdmis ? "Admis" : "Ajourné"}
+        ${lettreMatiere} — ${estAdmis ? "Admis" : "Ajourné"}
       </span>
     `;
 
@@ -191,6 +191,15 @@ function mettreAJourResume() {
   resumeCoefficients.textContent = totalCoefficients;
   resumeMention.textContent = obtenirMention(moyenne, totalCoefficients);
 
+/* On remet la classe de base, puis on ajoute la couleur du moment.
+     className = "..." écrase les anciennes classes, ce qui évite
+     qu'elles s'accumulent à chaque mise à jour. */
+  if (totalCoefficients > 0) {
+    resumeMention.className = "resume-valeur " + obtenirClasseCouleur(moyenne);
+  } else {
+    resumeMention.className = "resume-valeur";
+  }
+
   /* On adapte le libellé pour que l'utilisateur sache ce qu'il regarde */
   if (semestreChoisi === "tous") {
     labelMoyenne.textContent = "Moyenne générale";
@@ -202,13 +211,43 @@ function mettreAJourResume() {
 }
 
 /* Renvoie un texte selon la moyenne (le fameux "Admis / Ajourné"). */
+/* Renvoie UNIQUEMENT la lettre correspondant à une moyenne.
+   ATTENTION à l'ordre : on part du plus haut vers le plus bas.
+   Le premier "if" qui est vrai arrête la fonction avec "return". */
+function obtenirLettre(moyenne) {
+  if (moyenne >= 18) return "A+";
+  if (moyenne >= 16) return "A";
+  if (moyenne >= 14) return "B";
+  if (moyenne >= 12) return "C";
+  if (moyenne >= 10) return "D";
+  return "F";   /* en dessous de 10 */
+}
+
+/* Renvoie le nom de la classe CSS à appliquer selon la moyenne. */
+function obtenirClasseCouleur(moyenne) {
+  if (moyenne >= 16) return "note-excellent";
+  if (moyenne >= 14) return "note-bien";
+  if (moyenne >= 10) return "note-passable";
+  return "note-echec";
+}
+
+/* Un objet qui associe chaque lettre à son libellé.
+   C'est plus lisible qu'une longue suite de "if". */
+const libellesMentions = {
+  "A+": "Excellent",
+  "A":  "Très Bien",
+  "B":  "Bien",
+  "C":  "Assez Bien",
+  "D":  "Passable",
+  "F":  "Ajourné"
+};
+
+/* Renvoie le texte affiché dans la barre de résumé. */
 function obtenirMention(moyenne, totalCoefficients) {
-  if (totalCoefficients === 0) return "—"; /* aucune matière */
-  if (moyenne < 10) return "Ajourné";
-  if (moyenne < 12) return "Admis – Passable";
-  if (moyenne < 14) return "Admis – Assez Bien";
-  if (moyenne < 16) return "Admis – Bien";
-  return "Admis – Très Bien";
+  if (totalCoefficients === 0) return "—";   /* aucune matière */
+
+  const lettre = obtenirLettre(moyenne);
+  return lettre + " — " + libellesMentions[lettre];
 }
 
 /* ---------- 5. AJOUTER UNE MATIÈRE ---------- */

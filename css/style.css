@@ -412,3 +412,8 @@ select:focus {
     transition: none !important;
   }
 }
+/* ---------- Couleur du résultat selon la lettre ---------- */
+.note-excellent  { color: #16a34a !important; }  /* A+ et A : vert */
+.note-bien       { color: var(--violet) !important; }  /* B : violet */
+.note-passable   { color: #ea580c !important; }  /* C et D : orange */
+.note-echec      { color: var(--rouge) !important; }   /* F : rouge */
